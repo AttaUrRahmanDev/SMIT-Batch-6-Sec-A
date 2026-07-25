@@ -1,0 +1,23 @@
+<h2>🧾 CART</h2>
+
+<table>
+    <tr>
+        <th>Product</th>
+        <th>Qty</th>
+        <th>Price</th>
+        <th>Total</th>
+    </tr>
+
+    {% for item in items %}
+    <tr>
+        <td>{{ item.product.name }}</td>
+        <td>{{ item.quantity }}</td>
+        <td>{{ item.price }}</td>
+        <td>{{ item.price * item.quantity }}</td>
+    </tr>
+    {% endfor %}
+</table>
+
+<h3>Total: {{ total }}</h3>
+
+<a href="/pos">⬅ Back to POS</a>

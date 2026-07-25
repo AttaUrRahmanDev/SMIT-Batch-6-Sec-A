@@ -1,0 +1,366 @@
+{% extends 'base.html' %}
+{% block title %}Receipt #{{ sale.id }}{% endblock %}
+
+{% block content %}
+{% set receipt_product = product or sale.product %}
+{% set receipt_imei = (device.imei if device else receipt_product.imei) %}
+
+<style>
+    .receipt-card {
+        border-radius: 20px;
+        overflow: hidden;
+        border: 1px solid #e3e6ef;
+        background: white;
+    }
+
+    .receipt-header {
+        background: #0d6efd;
+        color: white;
+        padding: 26px 32px;
+    }
+
+    .receipt-header h2,
+    .receipt-header p {
+        margin: 0;
+    }
+
+    .info-box {
+        background: #f8f9fa;
+        border-radius: 16px;
+        padding: 18px;
+        min-height: 150px;
+    }
+
+    .info-box h5 {
+        margin-bottom: 14px;
+        font-size: 1rem;
+    }
+
+    .table thead {
+        background: #0d6efd;
+        color: white;
+    }
+
+    .badge-custom {
+        background: #e9ecef;
+        color: #333;
+        padding: 8px 14px;
+        border-radius: 30px;
+        font-size: 0.95rem;
+    }
+
+    .total-box {
+        background: #212529;
+        color: white;
+        border-radius: 16px;
+        padding: 22px;
+    }
+
+    .total-box span,
+    .total-box strong {
+        color: white;
+    }
+
+    .action-btns .btn {
+        border-radius: 12px;
+        padding: 12px 20px;
+        font-weight: 600;
+    }
+
+    .qr-box {
+        background: white;
+        padding: 18px;
+        border-radius: 16px;
+        box-shadow: 0 2px 18px rgba(0, 0, 0, 0.08);
+        text-align: center;
+    }
+
+    .footer-note {
+        font-size: 0.95rem;
+        color: #6c757d;
+    }
+
+    .print-details {
+        font-size: 0.95rem;
+        color: #495057;
+    }
+
+    @media print {
+
+        .no-print,
+        .action-btns,
+        .footer-note+.row,
+        .footer-note .no-print {
+            display: none !important;
+        }
+
+        body {
+            background: white !important;
+            color: #000 !important;
+        }
+
+        .receipt-card {
+            box-shadow: none !important;
+            border-radius: 0 !important;
+            border: none !important;
+            margin: 0;
+            padding: 0;
+        }
+
+        .receipt-header {
+            background: #0d6efd !important;
+            color: white !important;
+            padding: 16px !important;
+        }
+
+        .info-box,
+        .qr-box,
+        .total-box {
+            box-shadow: none !important;
+            border: 1px solid #ddd !important;
+            background: #fff !important;
+            color: #000 !important;
+        }
+
+        table {
+            page-break-inside: avoid !important;
+        }
+
+        .table th,
+        .table td {
+            border: 1px solid #000 !important;
+        }
+    }
+</style>
+
+<div class="container my-5">
+    <div class="card shadow-lg receipt-card">
+        <div class="receipt-header d-flex justify-content-between align-items-center flex-wrap gap-3">
+            <div>
+                <h2 class="fw-bold mb-2">🧾 RECEIPT</h2>
+                <p class="mb-1">Receipt ID: <strong>#{{ sale.id }}</strong></p>
+                <p class="mb-0">Date: <strong>{{ sale.sale_date | dt }}</strong></p>
+            </div>
+            <div class="text-end">
+                <h4 class="fw-bold mb-1">{{ sale.store.name }}</h4>
+                <p class="mb-0">Professional POS Invoice</p>
+            </div>
+        </div>
+
+        <div class="card-body p-4">
+            <div class="row g-4 mb-4">
+                <div class="col-md-4">
+                    <div class="info-box">
+                        <h5 class="fw-bold">🏪 Store Details</h5>
+                        <p class="mb-1"><strong>Name:</strong> {{ sale.store.name }}</p>
+                        <p class="mb-1"><strong>Receipt:</strong> #{{ sale.id }}</p>
+                        <p class="mb-0"><strong>Issued:</strong> {{ sale.sale_date | dt }}</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="info-box">
+                        <h5 class="fw-bold">👤 Customer Details</h5>
+                        <p class="mb-1"><strong>Name:</strong> {{ sale.customer_name or 'Walk-in' }}</p>
+                        <p class="mb-0"><strong>Phone:</strong> {{ sale.customer_number or '-' }}</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="qr-box">
+                        <img src="https://api.qrserver.com/v1/create-qr-code/?size=140x140&data={{ request.url }}"
+                            alt="Receipt QR Code" class="img-fluid mb-3">
+                        <div>
+                            <span class="badge-custom">Scan Receipt QR</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="table-responsive">
+                <table class="table table-hover align-middle table-bordered">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Product</th>
+                            <th>Code</th>
+                            <th>Category</th>
+                            <th>IMEI</th>
+                            <th>Qty</th>
+                            <th>Price</th>
+                            <th>Unit Price</th>
+                            <th>Discount</th>
+                            <th>Total</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>1</td>
+                            <td><strong>{{ receipt_product.name }}</strong></td>
+                            <td>{{ receipt_product.product_code }}</td>
+                            <td>{{ receipt_product.category or 'General' }}</td>
+                            <td><span class="badge bg-dark text-white">{{ receipt_imei or '-' }}</span></td>
+                            <td>{{ sale.quantity }}</td>
+                            <td>Rs {{ "%.2f"|format(receipt_product.sell_price) }}</td>
+                             <td>Rs {{ "%.2f"|format(sale.selling_price) }}</td>
+                            <td>
+                                {{ sale.discount and ("%.0f"|format(sale.discount) ~ '%') or '0%' }}
+                            </td>
+                            
+                            <td class="fw-bold text-success">
+                                Rs {{ "%.2f"|format(sale.selling_price * sale.quantity) }}
+                            </td>
+                        </tr>
+                    </tbody>
+
+                </table>
+            </div>
+
+            <!-- RECEIPT SUMMARY -->
+            <div class="row mt-4 gy-4">
+
+                <div class="col-md-6">
+                    <div class="info-box">
+                        <h5 class="fw-bold mb-3">Receipt Summary</h5>
+                        <p class="mb-1"><strong>Receipt ID:</strong> #{{ sale.id }}</p>
+                        <p class="mb-1"><strong>Issued:</strong> {{ sale.sale_date | dt }}</p>
+                        <p class="mb-1"><strong>Customer:</strong> {{ sale.customer_name or 'Walk-in' }}</p>
+                        <p class="mb-1"><strong>Phone:</strong> {{ sale.customer_number or '-' }}</p>
+                        <p class="mb-0"><strong>Payment:</strong> {{ sale.payment_method.replace('_', ' ').title() if
+                            sale.payment_method else 'Cash' }}</p>
+                    </div>
+                </div>
+
+                <div class="col-md-6">
+                    <div class="info-box">
+                        <h5 class="fw-bold mb-3">Product Details</h5>
+                        <p class="mb-1"><strong>Item:</strong> {{ receipt_product.name }}</p>
+                        <p class="mb-1"><strong>Code:</strong> {{ receipt_product.product_code }}</p>
+                        <p class="mb-1"><strong>IMEI:</strong> {{ receipt_imei or '-' }}</p>
+                        <p class="mb-0"><strong>Category:</strong> {{ receipt_product.category or 'General' }}</p>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="row mt-4 gy-4">
+                <div class="col-md-6">
+                    <div class="text-center">
+                        <img src="https://barcode.tec-it.com/barcode.ashx?data={{ sale.id }}&code=Code128" alt="Barcode"
+                            class="img-fluid">
+                        <p class="mt-2 text-muted mb-0">Receipt Barcode</p>
+                    </div>
+                </div>
+
+                <div class="col-md-6">
+                    <div class="total-box shadow">
+                        <div class="d-flex justify-content-between mb-2">
+                            <span>Subtotal</span>
+                            <strong>Rs {{ "%.2f"|format(( receipt_product.sell_price) *
+                                sale.quantity) }}</strong>
+                        </div>
+                        <div class="d-flex justify-content-between mb-2">
+                            <span>Discount</span>
+                            <strong>{{ sale.discount and ("%.0f"|format(sale.discount) ~ '%') or '0%' }}</strong>
+                        </div>
+                        <div class="d-flex justify-content-between mb-2">
+                            <span>Discount Amount</span>
+                            <strong>Rs {{ "%.2f"|format(((receipt_product.sell_price) *
+                                sale.quantity) * ((sale.discount or 0) / 100)) }}</strong>
+                        </div>
+                        <hr class="border-light">
+                        <div class="d-flex justify-content-between fs-4">
+                            <span>Grand Total</span>
+                            <strong>Rs {{ "%.2f"|format((sale.selling_price ) *
+                                sale.quantity )  }}</strong>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- BUTTONS -->
+            <div class="action-btns no-print d-flex flex-wrap gap-3 mt-5 justify-content-center">
+
+                <button class="btn btn-outline-primary shadow-sm" onclick="window.print()">
+                    🖨️ Print Receipt
+                </button>
+
+                <a href="{{ url_for('download_receipt', sale_id=sale.id) }}" class="btn btn-success shadow-sm">
+                    📄 Download PDF
+                </a>
+
+                <a href="{{ url_for('product_list') }}" class="btn btn-secondary shadow-sm">
+                    ⬅ Back
+                </a>
+
+            </div>
+
+            <!-- EMAIL + WHATSAPP -->
+            <div class="row mt-4 no-print">
+
+                <div class="col-md-6 mb-3">
+
+                    <form action="{{ url_for('send_receipt_email', sale_id=sale.id) }}" method="POST">
+
+                        <div class="card border-0 shadow-sm">
+                            <div class="card-body">
+
+                                <h5 class="fw-bold mb-3">
+                                    ✉️ Send Email
+                                </h5>
+
+                                <div class="input-group">
+                                    <input type="email" name="to_email" class="form-control"
+                                        placeholder="Customer Email" required>
+
+                                    <button type="submit" class="btn btn-info text-white">
+                                        Send
+                                    </button>
+                                </div>
+
+                            </div>
+                        </div>
+
+                    </form>
+
+                </div>
+
+                <div class="col-md-6 mb-3">
+
+                    <form action="{{ url_for('send_receipt_whatsapp', sale_id=sale.id) }}" method="POST">
+
+                        <div class="card border-0 shadow-sm">
+                            <div class="card-body text-center">
+
+                                <h5 class="fw-bold mb-3">
+                                    📲 WhatsApp Receipt
+                                </h5>
+
+                                <button type="submit" class="btn btn-success w-100">
+                                    Send on WhatsApp
+                                </button>
+
+                            </div>
+                        </div>
+
+                    </form>
+
+                </div>
+
+            </div>
+
+            <!-- FOOTER -->
+            <div class="text-center mt-5 footer-note">
+                <p class="mb-1">
+                    Thank you for shopping with us ❤️
+                </p>
+
+                <small>
+                    Generated digitally • Secure Receipt System
+                </small>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+{% endblock %}

@@ -1,0 +1,82 @@
+{% extends 'base.html' %}
+{% block title %}Sell Product{% endblock %}
+
+{% block content %}
+<h2 class="mb-4">🛒 Sell Product - {{ product.name }}</h2>
+
+<form method="POST">
+
+  <!-- 🔹 Select Existing Customer  -->
+ {# {% if customers %}
+  <div class="card p-3 mb-4 shadow-sm">
+    <h5>Select Existing Customer (Optional)</h5>
+    <select name="customer_id" class="form-control">
+      <option value="">-- Walk-in / New Customer --</option>
+      {% for c in customers %}
+      <option value="{{ c.id }}">{{ c.name }} — {{ c.phone or c.customer_number }}</option>
+      {% endfor %}
+    </select>
+  </div>
+  {% endif %}#}
+
+  <!-- 🔹 New Customer Information -->
+  {#<div class="card p-3 mb-4 shadow-sm">
+    <h5>New Customer Details</h5>
+
+    <div class="mb-3">
+      <label>Customer Name</label>
+      <input type="text" name="customer_name" class="form-control" placeholder="Enter name if new" required>
+    </div>
+
+    <div class="mb-3">
+      <label>Customer Number / Phone</label>
+      <input type="text" name="customer_number" class="form-control" placeholder="Enter phone or number" required>
+    </div>
+  </div> #}
+
+
+  <!-- 🔹 Select Existing Customer -->
+<div class="card p-3 mb-4 shadow-sm">
+  <h5>Select Customer</h5>
+
+  <select name="customer_id" class="form-control">
+    <option value="">-- New Customer --</option>
+    {% for c in customers %}
+    <option value="{{ c.id }}">
+      {{ c.name }} — {{ c.phone or c.customer_number }}
+    </option>
+    {% endfor %}
+  </select>
+</div>
+
+<!-- 🔹 New Customer Info (ONLY IF NEW) -->
+<div class="card p-3 mb-4 shadow-sm">
+  <h5>New Customer Details</h5>
+
+  <input type="text" name="customer_name" class="form-control mb-2" placeholder="Name (only if new)">
+  <input type="text" name="customer_number" class="form-control" placeholder="Phone (only if new)">
+</div>
+
+  <!-- 🔹 Product Sale Details -->
+  <div class="card p-3 mb-3 shadow-sm">
+    <h5>Sale Details</h5>
+
+    <div class="mb-3">
+      <label>Quantity (Available: {{ product.calculated_stock }})</label>
+      <input type="number" name="quantity" class="form-control" min="1" max="{{ product.calculated_stock }}" required>
+    </div>
+
+    <div class="mb-3">
+      <label>Sale Price per Unit (Rs.)</label>
+      <input type="number" name="sell_price" step="0.01" class="form-control" value="{{ product.sell_price }}" required>
+    </div>
+
+    <div class="mb-3">
+      <label>Date</label>
+      <input type="text" name="date" class="form-control" value="{{ now.strftime('%Y-%m-%d %H:%M:%S') if now else '' }}" readonly>
+    </div>
+  </div>
+
+  <button type="submit" class="btn btn-primary">💰 Sell Now</button>
+</form>
+{% endblock %}

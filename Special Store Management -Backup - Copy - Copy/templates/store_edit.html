@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+{% block content %}
+<h2>{{ store.id if store else 'Add' }} Store</h2>
+<form method="POST">
+<div class="mb-3">
+<label>Name</label>
+<input type="text" name="name" class="form-control" value="{{ store.name if store else '' }}" required>
+</div>
+<div class="mb-3">
+<label>Password (leave empty to keep current)</label>
+<input type="password" name="password" class="form-control">
+</div>
+<button type="submit" class="btn btn-success">Save</button>
+</form>
+{% endblock %}

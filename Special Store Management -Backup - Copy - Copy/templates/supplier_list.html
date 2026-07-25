@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+{% block title %}Suppliers{% endblock %}
+
+{% block content %}
+<h2>Suppliers</h2>
+
+<!-- Add Supplier button -->
+<a href="{{ url_for('add_supplier') }}" class="btn btn-primary mb-3">Add Supplier</a>
+
+
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>#</th>
+            <th>Name</th>
+            <th>Contact</th>
+            <th>Location</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for supplier in suppliers %}
+        <tr>
+            <td>{{ loop.index }}</td>
+            <td>{{ supplier.name }}</td>
+            <td>{{ supplier.phone }}</td>
+            <td>{{ supplier.location }}</td>
+            <td>
+                <!-- All action buttons inside the loop -->
+                <a href="{{ url_for('supplier_ledger', supplier_id=supplier.id) }}" class="btn btn-sm btn-primary">View Ledger</a>
+                <a href="{{ url_for('edit_supplier', id=supplier.id) }}" class="btn btn-sm btn-warning">Edit</a>
+                <a href="{{ url_for('delete_supplier', id=supplier.id) }}" class="btn btn-sm btn-danger">Delete</a>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

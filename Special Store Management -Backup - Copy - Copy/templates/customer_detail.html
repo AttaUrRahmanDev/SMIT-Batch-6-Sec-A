@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+{% block title %}{{ customer.name }}{% endblock %}
+{% block content %}
+<h3>{{ customer.name }}</h3>
+<p><strong>Phone:</strong> {{ customer.customer_number }}</p>  <!-- Changed: was customer.phone -->
+
+<p>Total Mobiles: {{ customer.total_mobiles() }} | Total Spent: {{ customer.total_spent() }}</p>
+<table class="table table-striped">
+<thead>
+<tr><th>#</th><th>Product</th><th>IMEI</th><th>Quantity</th><th>Unit Price</th><th>Total Price</th><th>Date</th></tr>
+</thead>
+<tbody>
+{% for sale in customer.sales %}
+<tr>
+<td>{{ loop.index }}</td>
+<td>{{ sale.product.name }}</td>
+<td>{{ sale.product.imei or '' }}</td>
+<td>{{ sale.quantity }}</td>
+<td>{{ sale.product.sell_price }}</td>
+<td>{{ sale.product.sell_price * sale.quantity }}</td>
+<td>{{ sale.sale_date | dt }}</td>
+
+</tr>
+{% endfor %}
+</tbody>
+</table>
+<a href="{{ url_for('export_customer_sales', customer_id=customer.id) }}" class="btn btn-success">Export Excel</a>
+{% endblock %}

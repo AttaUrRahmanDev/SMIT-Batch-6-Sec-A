@@ -1,0 +1,214 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="container mt-4">
+
+    <div class="card shadow">
+
+        <div class="card-header bg-dark text-white">
+            <h3>Add Device Stock</h3>
+        </div>
+
+        <div class="card-body">
+
+            <form method="POST">
+
+                <!-- PRODUCT -->
+                <div class="mb-3">
+                    <label class="form-label">Product</label>
+
+                    <select name="product_id" class="form-control" required>
+
+                        {% for product in products %}
+                        <option value="{{ product.id }}">
+                            {{ product.name }}
+                        </option>
+                        {% endfor %}
+
+                    </select>
+                </div>
+
+                <!-- STORAGE + COLOR -->
+                <div class="row">
+
+                    <div class="col-md-6 mb-3">
+
+                        <label class="form-label">
+                            Storage
+                        </label>
+
+                        <input type="text" name="storage" class="form-control" placeholder="128GB">
+
+                    </div>
+
+                    <div class="col-md-6 mb-3">
+
+                        <label class="form-label">
+                            Color
+                        </label>
+
+                        <input type="text" name="color" class="form-control" placeholder="Black">
+
+                    </div>
+
+                </div>
+
+                <!-- IMEI -->
+                <div class="mb-3">
+
+                    <label class="form-label">
+                        IMEI Number
+                    </label>
+
+                    <input type="text" name="imei" class="form-control" placeholder="Enter IMEI" required>
+
+                    <small class="text-muted">
+                        Every device must have unique IMEI
+                    </small>
+
+                    <div class="mt-3">
+                        <label class="form-label">Add-to-Cart QR (preview)</label>
+                        <div class="d-flex align-items-center gap-3">
+                            <img id="qrPreview" src="" alt="QR Preview" style="width:160px;height:160px;border:1px solid #e9ecef;border-radius:8px;object-fit:contain;">
+                            <div>
+                                <p class="mb-1">Scan this QR to add the device directly to POS cart.</p>
+                                <button id="copyLinkBtn" type="button" class="btn btn-outline-secondary btn-sm">Copy Add Link</button>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+                <!-- GRADE -->
+                <div class="mb-3">
+
+                    <label class="form-label">
+                        Grade
+                    </label>
+
+                    <select name="grade_id" class="form-control">
+
+                        {% for grade in grades %}
+                        <option value="{{ grade.id }}">
+                            {{ grade.name }}
+                        </option>
+                        {% endfor %}
+
+                    </select>
+
+                </div>
+
+              
+
+
+                <!-- BUY + SELL PRICE -->
+                <div class="row">
+
+                    <div class="col-md-6 mb-3">
+
+                        <label class="form-label">
+                            Buy Price
+                        </label>
+
+                        <input type="number" step="0.01" name="cost_price" class="form-control"
+                            placeholder="Enter Buy Price" required>
+
+                    </div>
+
+                    <div class="col-md-6 mb-3">
+
+                        <label class="form-label">
+                            Sell Price
+                        </label>
+
+                        <input type="number" step="0.01" name="sell_price" class="form-control"
+                            placeholder="Enter Sell Price" required>
+
+                    </div>
+
+                </div>
+
+                <!-- BATTERY -->
+                <div class="mb-3">
+
+                    <label class="form-label">
+                        Battery Health
+                    </label>
+
+                    <input type="number" name="battery_health" class="form-control" placeholder="95">
+
+                </div>
+
+                <!-- NOTES -->
+                <div class="mb-3">
+
+                    <label class="form-label">
+                        Notes
+                    </label>
+
+                    <textarea name="notes" class="form-control" rows="3" placeholder="Optional notes"></textarea>
+
+                </div>
+
+                <!-- BUTTON -->
+                <button type="submit" class="btn btn-success w-100">
+
+                    Add Device To Stock
+
+                </button>
+
+            </form>
+
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}
+
+{% block scripts %}
+<script>
+(function(){
+  const imeiInput = document.querySelector('input[name="imei"]');
+  const qrImg = document.getElementById('qrPreview');
+  const copyBtn = document.getElementById('copyLinkBtn');
+  const storeId = {{ store.id }};
+  const qrPath = '{{ url_for("pos.device_qr_add") }}';
+
+  function updateQR(){
+    const imei = (imeiInput.value || '').trim();
+    if(!imei){
+      qrImg.src = '';
+      copyBtn.dataset.link = '';
+      return;
+    }
+
+    const addUrl = window.location.origin + qrPath + '?store=' + encodeURIComponent(storeId) + '&imei=' + encodeURIComponent(imei);
+    qrImg.src = 'https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=' + encodeURIComponent(addUrl);
+    copyBtn.dataset.link = addUrl;
+  }
+
+  imeiInput.addEventListener('input', updateQR);
+
+  copyBtn.addEventListener('click', function(){
+    const link = this.dataset.link;
+    if(!link) return;
+    if(navigator.clipboard){
+      navigator.clipboard.writeText(link).then(()=>{
+        this.innerText = 'Copied';
+        setTimeout(()=>{ this.innerText = 'Copy Add Link'; }, 1500);
+      });
+    } else {
+      prompt('Copy add-to-cart link', link);
+    }
+  });
+
+  updateQR();
+})();
+</script>
+{% endblock %}
+
+
+

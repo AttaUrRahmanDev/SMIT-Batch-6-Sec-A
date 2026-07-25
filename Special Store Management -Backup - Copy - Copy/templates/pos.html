@@ -1,0 +1,972 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🛒 Advanced POS System</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+   
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 15px;
+        }
+
+        .pos-container {
+            display: grid;
+            grid-template-columns: 1.2fr 1fr;
+            gap: 20px;
+            height: 90vh;
+            margin-bottom: 20px;
+        }
+
+        .pos-section {
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+            padding: 20px;
+            overflow-y: auto;
+            position: relative;
+        }
+
+        .admin-badge {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: #ff6b6b;
+            color: white;
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 11px;
+            font-weight: bold;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 15px;
+            border-radius: 10px;
+            margin-bottom: 15px;
+            text-align: center;
+        }
+
+        .header h2 {
+            margin: 0;
+            font-weight: bold;
+            font-size: 20px;
+        }
+
+        .user-info {
+            background: #f0f0f0;
+            padding: 10px;
+            border-radius: 8px;
+            margin-bottom: 15px;
+            font-size: 13px;
+            border-left: 4px solid #667eea;
+        }
+
+        .scanner-section {
+            background: #f8f9fa;
+            padding: 15px;
+            border-radius: 10px;
+            margin-bottom: 15px;
+            border: 2px solid #667eea;
+        }
+
+        .scanner-input {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #667eea;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: bold;
+            margin-bottom: 10px;
+            transition: all 0.3s;
+            background: white;
+        }
+
+        .scanner-input:focus {
+            outline: none;
+            border-color: #764ba2;
+            box-shadow: 0 0 10px rgba(102, 126, 234, 0.3);
+        }
+
+        .scanner-hint {
+            background: #e7f3ff;
+            border-left: 4px solid #2196F3;
+            padding: 10px;
+            border-radius: 5px;
+            font-size: 12px;
+            color: #0c5460;
+            margin-bottom: 10px;
+        }
+
+        .qty-section {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+            margin-bottom: 10px;
+        }
+
+        .btn-add {
+            width: 100%;
+            padding: 12px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-size: 14px;
+        }
+
+        .btn-add:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+        }
+
+        .product-search {
+            margin-bottom: 15px;
+        }
+
+        .product-search input {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-size: 13px;
+        }
+
+        .products-list {
+            max-height: 350px;
+            overflow-y: auto;
+            margin-bottom: 15px;
+        }
+
+        .product-item {
+            background: #f8f9fa;
+            padding: 10px;
+            margin: 5px 0;
+            border-radius: 8px;
+            border-left: 4px solid #667eea;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 13px;
+        }
+
+        .product-item:hover {
+            background: #e9ecef;
+            transform: translateX(5px);
+        }
+
+        .product-info {
+            flex: 1;
+        }
+
+        .product-name {
+            font-weight: bold;
+            color: #333;
+        }
+
+        .product-code {
+            font-size: 11px;
+            color: #999;
+        }
+
+        .product-category {
+            font-size: 11px;
+            color: #555;
+            margin-top: 5px;
+        }
+
+        .product-meta {
+            display: flex;
+            gap: 8px;
+            align-items: center;
+            margin-top: 10px;
+        }
+
+        .cart-controls {
+            display: flex;
+            gap: 8px;
+            margin-top: 10px;
+            flex-wrap: wrap;
+        }
+
+        .cart-controls input {
+            width: 90px;
+            padding: 8px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-size: 12px;
+        }
+
+        .item-actions {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+            gap: 10px;
+        }
+
+        .item-subtotal {
+            font-size: 12px;
+            color: #6c757d;
+            margin-top: 6px;
+        }
+
+        .product-stock {
+            background: #667eea;
+            color: white;
+            padding: 2px 8px;
+            border-radius: 12px;
+            font-size: 11px;
+            margin-right: 8px;
+        }
+
+        .product-price {
+            color: #667eea;
+            font-weight: bold;
+        }
+
+        .cart-header {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            color: white;
+            padding: 15px;
+            border-radius: 10px;
+            margin-bottom: 15px;
+            text-align: center;
+            position: relative;
+        }
+
+        .cart-item {
+            background: #fff;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            padding: 10px;
+            margin-bottom: 8px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: all 0.3s;
+            font-size: 13px;
+        }
+
+        .cart-item:hover {
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+        }
+
+        .item-details {
+            flex: 1;
+        }
+
+        .item-name {
+            font-weight: bold;
+            color: #333;
+        }
+
+        .item-qty {
+            color: #666;
+            font-size: 12px;
+        }
+
+        .item-price {
+            font-weight: bold;
+            color: #f5576c;
+            margin-right: 8px;
+            min-width: 60px;
+            text-align: right;
+        }
+
+        .btn-remove {
+            background: #f5576c;
+            color: white;
+            border: none;
+            padding: 4px 8px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 11px;
+            transition: all 0.3s;
+        }
+
+        .btn-remove:hover {
+            background: #d63447;
+        }
+
+        .cart-total {
+            background: #f8f9fa;
+            padding: 15px;
+            border-radius: 8px;
+            margin: 15px 0;
+            text-align: center;
+            border: 2px solid #667eea;
+        }
+
+        .total-label {
+            color: #666;
+            font-size: 13px;
+        }
+
+        .total-amount {
+            font-size: 32px;
+            font-weight: bold;
+            color: #f5576c;
+        }
+
+        .currency {
+            font-size: 18px;
+        }
+
+        .checkout-options {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+            margin-bottom: 10px;
+        }
+
+        .checkout-btn {
+            padding: 12px;
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .checkout-btn:hover:not(:disabled) {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(245, 87, 108, 0.4);
+        }
+
+        .checkout-btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        .clear-btn {
+            padding: 10px;
+            background: #6c757d;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 13px;
+            transition: all 0.3s;
+            width: 100%;
+        }
+
+        .clear-btn:hover {
+            background: #5a6268;
+        }
+
+        .empty-cart {
+            text-align: center;
+            color: #999;
+            padding: 30px 20px;
+            font-size: 14px;
+        }
+
+        .badge-count {
+            background: #f5576c;
+            color: white;
+            border-radius: 50%;
+            padding: 5px 10px;
+            font-weight: bold;
+            margin-left: 5px;
+        }
+
+        .error-message {
+            background: #f8d7da;
+            border: 1px solid #f5c6cb;
+            color: #721c24;
+            padding: 12px;
+            border-radius: 8px;
+            margin-bottom: 15px;
+            display: none;
+        }
+
+        .success-message {
+            background: #d4edda;
+            border: 1px solid #c3e6cb;
+            color: #155724;
+            padding: 12px;
+            border-radius: 8px;
+            margin-bottom: 15px;
+            display: none;
+        }
+
+        .scanner-status {
+            background: #e7f3ff;
+            border-left: 4px solid #2196F3;
+            padding: 8px;
+            border-radius: 5px;
+            font-size: 12px;
+            color: #0c5460;
+            margin-top: 10px;
+        }
+
+        .payment-method {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 8px;
+            margin-bottom: 10px;
+        }
+
+        .payment-btn {
+            padding: 8px;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            background: white;
+            cursor: pointer;
+            font-size: 12px;
+            transition: all 0.3s;
+        }
+
+        .payment-btn.active {
+            border-color: #667eea;
+            background: #f0f4ff;
+            color: #667eea;
+            font-weight: bold;
+        }
+
+        .discount-section {
+            margin-bottom: 10px;
+        }
+
+        .discount-input {
+            width: 100%;
+            padding: 8px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 13px;
+        }
+
+        .customer-section {
+            margin-top: 15px;
+            margin-bottom: 15px;
+            padding: 15px;
+            background: #f8f9fa;
+            border: 1px dashed #ced4da;
+            border-radius: 10px;
+        }
+
+        .customer-section input {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            margin-top: 8px;
+            font-size: 13px;
+        }
+
+        .summary-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 12px 0;
+            border-top: 1px solid #e9ecef;
+            margin-top: 15px;
+        }
+
+        .summary-label {
+            color: #343a40;
+            font-size: 13px;
+            font-weight: 600;
+        }
+
+        .summary-value {
+            font-weight: bold;
+            color: #495057;
+        }
+
+        .logout-btn {
+            width: 100%;
+            padding: 10px;
+            background: #dc3545;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 13px;
+            margin-top: 10px;
+        }
+
+        @media (max-width: 1200px) {
+            .pos-container {
+                grid-template-columns: 1fr;
+                height: auto;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="pos-container">
+
+    <!-- LEFT SIDE - SEARCH & ADD -->
+    <div class="pos-section">
+        {% if session.get('role') == 'admin' %}
+        <div class="admin-badge">👑 ADMIN</div>
+        {% endif %}
+
+        <div class="header">
+            <h2>🔍 Product Selection</h2>
+        </div>
+
+        <div class="user-info">
+            <strong>🏪 Store:</strong> {{ store.name if store else 'Unknown' }}<br>
+            <strong>👤 User:</strong> {{ session.get('cashier_name', 'Admin') }}<br>
+            <strong>🆔 Role:</strong> {{ session.get('role', 'unknown').capitalize() }}
+        </div>
+
+        <div id="error-msg" class="error-message"></div>
+        <div id="success-msg" class="success-message"></div>
+
+        <!-- Scanner Section -->
+        <div class="scanner-section">
+            <label class="form-label"><strong>📱 Barcode/QR Scanner</strong></label>
+            <input type="text" id="barcode" class="scanner-input" placeholder="Point scanner here → Press Enter" autofocus>
+            <div class="scanner-hint">
+                ℹ️ <strong>Scanner Mode:</strong> Barcode scanners automatically send data + Enter key when you scan. Just focus on this field!
+            </div>
+        </div>
+
+        <!-- Quantity & Add -->
+        <div class="qty-section">
+            <div>
+                <label class="form-label" style="font-size: 13px;"><strong>📦 Qty</strong></label>
+                <input type="number" id="qty" class="form-control" value="1" min="1" max="999" style="font-size: 13px;">
+            </div>
+            <div>
+                <label class="form-label" style="font-size: 13px;"><strong>💰 Discount %</strong></label>
+                <input type="number" id="discount" class="form-control" value="0" min="0" max="100" style="font-size: 13px;">
+            </div>
+        </div>
+
+        <button class="btn-add" onclick="addFromScanner()">
+            <i class="fas fa-plus"></i> Add to Cart
+        </button>
+
+        <!-- Product Search -->
+        <div class="product-search">
+            <label class="form-label" style="font-size: 13px;"><strong>🔎 Search Products</strong></label>
+            <input type="text" id="search" placeholder="Search by name or code..." onkeyup="searchProduct()">
+        </div>
+
+        <div class="products-list" id="results"></div>
+
+        <div class="scanner-status">
+            ✅ <strong>Scanner Help:</strong><br>
+            • Most scanners work automatically<br>
+            • Ensure barcode field is focused<br>
+            • Try scanning: PROD001, PROD002, etc.<br>
+            • Or manually type + press Enter
+        </div>
+
+        <a href="/logout" class="logout-btn">🔓 Logout</a>
+    </div>
+
+    <!-- RIGHT SIDE - CART & CHECKOUT -->
+    <div class="pos-section">
+        <div class="cart-header">
+            <h2>🧾 Shopping Cart <span class="badge-count" id="cart-count">0</span></h2>
+        </div>
+
+        <div id="cart-items"></div>
+
+        <div class="customer-section">
+            <label class="form-label" style="font-size: 13px; font-weight: bold;">Select Customer (Existing or New)</label>
+            <select id="customer_select" class="form-control" onchange="onCustomerSelected()">
+                <option value="">-- New Customer --</option>
+                {% for c in customers %}
+                <option value="{{ c.customer_number }}">{{ c.name }} — {{ c.customer_number }}</option>
+                {% endfor %}
+            </select>
+
+            <label class="form-label" style="font-size: 13px; font-weight: bold; margin-top: 10px; display: block;">Customer Name:</label>
+            <input type="text" id="customer_name" placeholder="Walk-in customer">
+
+            <label class="form-label" style="font-size: 13px; font-weight: bold; margin-top: 10px; display: block;">Phone / Contact:</label>
+            <input type="text" id="customer_number" placeholder="Customer phone or number" oninput="onCustomerNumberInput()">
+        </div>
+
+
+        <div class="summary-row">
+            <div class="summary-label">Items:</div>
+            <div class="summary-value" id="summary-count">0</div>
+        </div>
+        <div class="summary-row">
+            <div class="summary-label">Total Amount:</div>
+            <div class="summary-value">₨ <span id="cart-total">0.00</span></div>
+        </div>
+
+        <div style="margin-bottom: 10px;">
+            <label style="font-size: 13px; font-weight: bold;">Payment Method:</label>
+            <div class="payment-method">
+                <button class="payment-btn active" onclick="setPayment('cash', event)">💵 Cash</button>
+                <button class="payment-btn" onclick="setPayment('debit_card', event)">💳 Debit Card</button>
+
+            </div>
+        </div>
+
+        <button class="checkout-btn" id="checkout-btn" onclick="checkout()" style="width: 100%;" disabled>
+            <i class="fas fa-check"></i> Complete Sale
+        </button>
+        <button class="checkout-btn" id="print-btn" onclick="printReceipt()" style="background: #28a745; width: 100%; margin-top: 8px; display: none;">
+            <i class="fas fa-print"></i> Print Receipt
+        </button>
+        <button class="clear-btn" onclick="clearCart()">🗑️ Clear Cart</button>
+    </div>
+
+</div>
+
+<script>
+let selectedPayment = 'cash';
+let lastSaleId = null;
+
+// Auto-load cart and products on page load
+document.addEventListener('DOMContentLoaded', function() {
+    loadCart();
+    loadProducts();
+    document.getElementById('barcode').focus();
+    console.log('[POS] System initialized. Scanner mode active.');
+});
+
+// Handle scanner input (usually sends Enter key at end)
+document.getElementById('barcode').addEventListener('keypress', function(e) {
+    if (e.key === 'Enter') {
+        e.preventDefault();
+        addFromScanner();
+    }
+});
+
+function showError(msg) {
+    const el = document.getElementById('error-msg');
+    el.textContent = msg;
+    el.style.display = 'block';
+    setTimeout(() => { el.style.display = 'none'; }, 5000);
+}
+
+function showSuccess(msg) {
+    const el = document.getElementById('success-msg');
+    el.textContent = msg;
+    el.style.display = 'block';
+    setTimeout(() => { el.style.display = 'none'; }, 3000);
+}
+
+function setPayment(method, event) {
+    selectedPayment = method;
+    document.querySelectorAll('.payment-btn').forEach(btn => btn.classList.remove('active'));
+    if (event && event.currentTarget) {
+        event.currentTarget.classList.add('active');
+    }
+}
+
+async function onCustomerSelected() {
+    const select = document.getElementById('customer_select');
+    const cn = (select.value || '').trim();
+
+    // If user chooses a specific existing customer (value = customer_number), load details.
+    if (cn) {
+        document.getElementById('customer_number').value = cn;
+        try {
+            const res = await fetch(`/pos/customer/lookup?customer_number=${encodeURIComponent(cn)}`);
+            const data = await res.json();
+            if (res.ok && data.found) {
+                document.getElementById('customer_name').value = data.name || '';
+                return;
+            }
+        } catch (e) {
+            console.error('Customer lookup failed', e);
+        }
+    }
+
+    // New customer selected
+    document.getElementById('customer_name').value = '';
+    document.getElementById('customer_number').value = '';
+}
+
+async function onCustomerNumberInput() {
+    const select = document.getElementById('customer_select');
+    const cn = (document.getElementById('customer_number').value || '').trim();
+
+    // If input matches one of the dropdown options, select it.
+    if (!cn) {
+        select.value = '';
+        return;
+    }
+
+    // If it matches, set dropdown; then fetch name
+    select.value = cn;
+
+    try {
+        const res = await fetch(`/pos/customer/lookup?customer_number=${encodeURIComponent(cn)}`);
+        const data = await res.json();
+        if (res.ok && data.found) {
+            document.getElementById('customer_name').value = data.name || '';
+        }
+    } catch (e) {
+        // ignore, allow new customer manual entry
+    }
+}
+
+async function loadProducts(query = '') {
+
+    try {
+        const url = query ? `/pos/search?q=${encodeURIComponent(query)}` : '/pos/products';
+        const response = await fetch(url);
+        const data = await response.json();
+
+        const results = data.products || [];
+        let html = '';
+
+        if (results.length === 0) {
+            html = '<p style="text-align: center; color: #999; padding: 20px;">No products available.</p>';
+        } else {
+            results.forEach(p => {
+                html += `
+                <div class="product-item" onclick="quickAdd('${p.code}')">
+                    <div class="product-info">
+                        <div class="product-name">${p.name}</div>
+                        <div class="product-code">Code: ${p.code}</div>
+                        <div class="product-category">${p.category}</div>
+                    </div>
+                    <div class="product-meta">
+                        <span class="product-stock">Stock: ${p.stock || 0}</span>
+                        <span class="product-price">₨ ${p.price.toFixed(2)}</span>
+                    </div>
+                </div>
+                `;
+            });
+        }
+
+        document.getElementById('results').innerHTML = html;
+    } catch (error) {
+        console.error('Unable to load products:', error);
+        showError('Unable to load inventory.');
+    }
+}
+
+async function addFromScanner() {
+    const code = document.getElementById('barcode').value.trim();
+    const qty = parseInt(document.getElementById('qty').value) || 1;
+    const discount = parseFloat(document.getElementById('discount').value) || 0;
+
+    if (!code) {
+        showError('❌ Please enter or scan a product code');
+        document.getElementById('barcode').focus();
+        return;
+    }
+
+    try {
+        const response = await fetch('/pos/add-to-cart', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ code: code, quantity: qty, discount: discount })
+        });
+
+        const data = await response.json();
+
+        if (response.ok) {
+            showSuccess(`✅ Added ${data.product_name} x${qty} to cart!`);
+            document.getElementById('barcode').value = '';
+            document.getElementById('qty').value = '1';
+            document.getElementById('discount').value = '0';
+            loadCart();
+            document.getElementById('barcode').focus();
+        } else {
+            showError('❌ ' + (data.error || 'Product not found'));
+            console.error('[POS Error]', data.error);
+            document.getElementById('barcode').value = '';
+            document.getElementById('barcode').focus();
+        }
+    } catch (error) {
+        console.error('Error:', error);
+        showError('❌ Error adding to cart: ' + error.message);
+        document.getElementById('barcode').focus();
+    }
+}
+
+async function searchProduct() {
+    const q = document.getElementById('search').value;
+
+    if (q.length < 1) {
+        loadProducts();
+        return;
+    }
+
+    loadProducts(q);
+}
+
+function quickAdd(code) {
+    document.getElementById('barcode').value = code;
+    document.getElementById('barcode').focus();
+    addFromScanner();
+}
+
+function createCartRow(item) {
+    return `
+        <div class="cart-item">
+            <div class="item-details">
+                <div class="item-name">${item.product_name}</div>
+                <div class="item-qty">Code: ${item.product_code}</div>
+                <div class="cart-controls">
+                    <input type="number" min="1" value="${item.quantity}" onchange="updateCartItem('${item.cart_key}', this.value, ${item.discount})" title="Update quantity">
+                    <input type="number" min="0" max="100" value="${item.discount}" onchange="updateCartItem('${item.cart_key}', ${item.quantity}, this.value)" title="Discount %">
+
+                </div>
+                <div class="item-subtotal">Unit: ₨ ${item.discounted_price.toFixed(2)} | Discount: ${item.discount}%</div>
+            </div>
+            <div class="item-actions">
+                <div class="item-price">₨ ${item.total.toFixed(2)}</div>
+                <button class="btn-remove" onclick="removeFromCart('${item.cart_key}')"><i class="fas fa-trash"></i></button>
+
+            </div>
+        </div>
+    `;
+}
+
+async function loadCart() {
+    try {
+        const response = await fetch('/pos/cart');
+        const data = await response.json();
+
+        document.getElementById('cart-count').textContent = data.items.length;
+        document.getElementById('summary-count').textContent = data.count;
+        document.getElementById('cart-total').textContent = data.total.toFixed(2);
+
+        let html = '';
+        if (data.items.length === 0) {
+            html = '<div class="empty-cart">🛒 Cart is empty.<br>Scan or search products to add.</div>';
+            document.getElementById('checkout-btn').disabled = true;
+            document.getElementById('print-btn').style.display = 'none';
+        } else {
+            data.items.forEach(item => {
+                html += createCartRow(item);
+            });
+            document.getElementById('checkout-btn').disabled = false;
+            document.getElementById('print-btn').style.display = 'none';
+        }
+
+        document.getElementById('cart-items').innerHTML = html;
+    } catch (error) {
+        console.error('Error loading cart:', error);
+        showError('Error loading cart');
+    }
+}
+
+async function updateCartItem(itemId, quantity, discount) {
+    try {
+        quantity = parseInt(quantity) || 1;
+        discount = parseFloat(discount) || 0;
+
+        const response = await fetch(`/pos/cart/update/${itemId}`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ quantity: quantity, discount: discount })
+        });
+
+        if (response.ok) {
+            showSuccess('✅ Cart updated');
+            loadCart();
+        } else {
+            const data = await response.json();
+            showError('❌ ' + (data.error || 'Unable to update cart'));
+        }
+    } catch (error) {
+        console.error('Error updating cart:', error);
+        showError('Error updating cart');
+    }
+}
+
+async function removeFromCart(itemId) {
+    if (!confirm('Remove this item from cart?')) return;
+
+    try {
+        const response = await fetch(`/pos/cart/remove/${itemId}`, {
+            method: 'POST'
+        });
+
+        if (response.ok) {
+            loadCart();
+            showSuccess('✅ Item removed');
+        }
+    } catch (error) {
+        console.error('Error:', error);
+        showError('Error removing item');
+    }
+}
+
+async function clearCart() {
+    if (!confirm('Clear entire cart?')) return;
+
+    try {
+        const response = await fetch('/pos/cart/clear', {
+            method: 'POST'
+        });
+
+        if (response.ok) {
+            loadCart();
+            showSuccess('✅ Cart cleared');
+        }
+    } catch (error) {
+        console.error('Error:', error);
+        showError('Error clearing cart');
+    }
+}
+
+async function checkout() {
+    const customerName = document.getElementById('customer_name').value.trim();
+    const customerNumber = document.getElementById('customer_number').value.trim();
+
+    if (!confirm(`Checkout with ${selectedPayment.toUpperCase()} payment?`)) return;
+
+    try {
+        const response = await fetch('/pos/checkout', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+                payment_method: selectedPayment,
+                customer_name: customerName,
+                customer_number: customerNumber
+            })
+        });
+
+        const data = await response.json();
+
+        if (response.ok) {
+            lastSaleId = data.sale_id;
+            showSuccess('✅ Checkout complete! Sale ID: ' + data.sale_id);
+            loadCart();
+            document.getElementById('checkout-btn').disabled = true;
+            document.getElementById('print-btn').style.display = 'block';
+        } else {
+            showError('❌ Checkout failed: ' + (data.error || 'Unknown error'));
+        }
+    } catch (error) {
+        console.error('Error:', error);
+        showError('Checkout error: ' + error.message);
+    }
+}
+
+async function printReceipt() {
+    if (lastSaleId) {
+        window.open(`/receipt/${lastSaleId}`, '_blank');
+    } else {
+        showError('No sale to print');
+    }
+}
+</script>
+
+</body>
+</html>

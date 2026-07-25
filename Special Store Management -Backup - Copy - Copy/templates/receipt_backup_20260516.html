@@ -1,0 +1,76 @@
+{% extends 'base.html' %}
+{% block title %}Receipt Backup #{{ sale.id }}{% endblock %}
+
+{% block content %}
+{% set receipt_product = product or sale.product %}
+
+<style>
+    /* Backup copy - style preserved from original */
+    .receipt-card { border-radius: 20px; overflow: hidden; border: 1px solid #e3e6ef; background: white; }
+    .receipt-header { background: #0d6efd; color: white; padding: 26px 32px; }
+    .info-box { background: #f8f9fa; border-radius: 16px; padding: 18px; min-height: 150px; }
+    .qr-box { background: white; padding: 18px; border-radius: 16px; box-shadow: 0 2px 18px rgba(0,0,0,0.08); text-align:center }
+</style>
+
+<div class="container my-5">
+    <div class="card shadow-lg receipt-card">
+        <div class="receipt-header d-flex justify-content-between align-items-center">
+            <div>
+                <h2 class="fw-bold mb-2">🧾 RECEIPT (Backup)</h2>
+                <p class="mb-1">Receipt ID: <strong>#{{ sale.id }}</strong></p>
+                <p class="mb-0">Date: <strong>{{ sale.sale_date | dt }}</strong></p>
+            </div>
+            <div class="text-end">
+                <h4 class="fw-bold mb-1">{{ sale.store.name }}</h4>
+            </div>
+        </div>
+
+        <div class="card-body p-4">
+            <div class="row g-4 mb-4">
+                <div class="col-md-4">
+                    <div class="info-box">
+                        <h5 class="fw-bold">🏪 Store Details</h5>
+                        <p class="mb-1"><strong>Name:</strong> {{ sale.store.name }}</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="info-box">
+                        <h5 class="fw-bold">👤 Customer Details</h5>
+                        <p class="mb-1"><strong>Name:</strong> {{ sale.customer_name or 'Walk-in' }}</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="qr-box">
+                        <img src="https://api.qrserver.com/v1/create-qr-code/?size=140x140&data={{ request.url }}" alt="Receipt QR Code" class="img-fluid mb-3">
+                        <div><span class="badge">Scan Receipt QR</span></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="table-responsive">
+                <table class="table table-hover align-middle table-bordered">
+                    <thead>
+                        <tr><th>#</th><th>Product</th><th>Code</th><th>IMEI</th><th>Qty</th><th>Unit Price</th><th>Total</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>1</td>
+                            <td><strong>{{ receipt_product.name }}</strong></td>
+                            <td>{{ receipt_product.product_code }}</td>
+                            <td>{{ receipt_product.imei or '-' }}</td>
+                            <td>{{ sale.quantity }}</td>
+                            <td>Rs {{ "%.2f"|format(sale.selling_price or receipt_product.sell_price) }}</td>
+                            <td class="fw-bold text-success">Rs {{ "%.2f"|format((sale.selling_price or receipt_product.sell_price) * sale.quantity * (1 - (sale.discount or 0) / 100)) }}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="text-center mt-5">
+                <p class="mb-1">Thank you for shopping with us ❤️</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

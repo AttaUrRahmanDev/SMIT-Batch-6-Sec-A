@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+
+{% block title %}Cashier Login{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+  <div class="row justify-content-center">
+    <div class="col-md-5">
+      <div class="card shadow-sm">
+        <div class="card-body">
+          <h3 class="card-title mb-4 text-center">👩‍💼 Cashier Login</h3>
+          <form method="POST" action="{{ url_for('pos.cashier_login') }}">
+            <div class="mb-3">
+              <label class="form-label">Username</label>
+              <input name="username" class="form-control" placeholder="Username" required autofocus>
+            </div>
+            <div class="mb-3">
+              <label class="form-label">Password</label>
+              <input name="password" type="password" class="form-control" placeholder="Password" required>
+            </div>
+            <div class="d-grid gap-2">
+              <button type="submit" class="btn btn-primary">Login</button>
+              <a href="{{ url_for('dashboard') }}" class="btn btn-secondary">Back to Admin</a>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

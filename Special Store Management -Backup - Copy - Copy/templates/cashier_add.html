@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <h3 class="text-center">➕ Add New Cashier</h3>
+            
+            <form method="POST" class="mt-4">
+                <div class="mb-3">
+                    <label class="form-label">Cashier Name</label>
+                    <input type="text" name="name" class="form-control" required placeholder="e.g., Ali Ahmed">
+                </div>
+                
+                <div class="mb-3">
+                    <label class="form-label">Username</label>
+                    <input type="text" name="username" class="form-control" required placeholder="e.g., cashier2">
+                </div>
+                
+                <div class="mb-3">
+                    <label class="form-label">Password</label>
+                    <input type="password" name="password" class="form-control" required placeholder="Enter secure password">
+                </div>
+                
+                <div class="d-grid gap-2">
+                    <button type="submit" class="btn btn-success">✅ Create Cashier</button>
+                    <a href="{{ url_for('cashier_list') }}" class="btn btn-secondary">⬅ Back to Cashiers</a>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<style>
+    .container {
+        background: #f8f9fa;
+        padding: 30px;
+        border-radius: 10px;
+    }
+</style>
+{% endblock %}

@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+{% block title %}Sell Product{% endblock %}
+{% block content %}
+<h2>Sell Product: {{ product.name }} (IMEI: {{ product.imei }})</h2>
+<form method="POST">
+    <label>Customer Name:</label>
+    <input type="text" name="customer_name" required>
+    <label>Customer Phone:</label>
+    <input type="text" name="customer_phone" required>
+    <label>Sold Date:</label>
+    <input type="date" name="sold_date" value="{{ now().strftime('%Y-%m-%d') }}" required>
+    <button type="submit">Complete Sale & Generate Receipt</button>
+</form>
+{% endblock %}
