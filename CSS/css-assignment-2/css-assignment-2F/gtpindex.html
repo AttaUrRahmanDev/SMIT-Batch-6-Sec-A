@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Luxury Hotel Blog</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+body{
+    font-family:'Poppins',sans-serif;
+    background:#f4f4f4;
+    color:#444;
+}
+
+/* Navigation */
+
+header{
+    background:white;
+    box-shadow:0 3px 10px rgba(0,0,0,.1);
+    position:sticky;
+    top:0;
+    z-index:100;
+}
+
+nav{
+    width:90%;
+    margin:auto;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    padding:18px 0;
+}
+
+.logo{
+    font-size:28px;
+    font-weight:bold;
+    color:#C89B3C;
+}
+
+nav ul{
+    list-style:none;
+    display:flex;
+    gap:30px;
+}
+
+nav a{
+    text-decoration:none;
+    color:#333;
+    font-weight:500;
+    transition:.3s;
+}
+
+nav a:hover{
+    color:#C89B3C;
+}
+
+/* Hero */
+
+.hero{
+    width:90%;
+    margin:40px auto;
+    text-align:center;
+}
+
+.hero img{
+    width:100%;
+    max-height:500px;
+    object-fit:cover;
+    border-radius:18px;
+    box-shadow:0 10px 30px rgba(0,0,0,.15);
+}
+
+.hero h1{
+    margin-top:25px;
+    font-size:42px;
+    color:#C89B3C;
+}
+
+.hero p{
+    margin-top:10px;
+    color:#666;
+    font-size:18px;
+}
+
+/* Blog */
+
+.container{
+    width:90%;
+    max-width:900px;
+    margin:auto;
+}
+
+.blog-post{
+    background:white;
+    border-radius:15px;
+    padding:30px;
+    margin-bottom:40px;
+    box-shadow:0 8px 20px rgba(0,0,0,.08);
+    transition:.3s;
+}
+
+.blog-post:hover{
+    transform:translateY(-5px);
+    box-shadow:0 12px 25px rgba(0,0,0,.15);
+}
+
+.blog-post h2{
+    color:#C89B3C;
+    margin:15px 0;
+}
+
+.blog-post small{
+    color:gray;
+}
+
+.blog-post p{
+    text-align:justify;
+    line-height:1.8;
+    margin-top:15px;
+}
+
+/* Continue Reading */
+
+.read-btn{
+    display:block;
+    width:220px;
+    margin:25px auto;
+    text-align:center;
+    background:#C89B3C;
+    color:white;
+    padding:12px;
+    border-radius:40px;
+    cursor:pointer;
+    list-style:none;
+    font-weight:600;
+    transition:.3s;
+}
+
+.read-btn:hover{
+    background:#9d7527;
+}
+
+details p{
+    margin-top:20px;
+}
+
+/* Footer */
+
+footer{
+    background:#222;
+    color:white;
+    text-align:center;
+    padding:30px;
+    margin-top:50px;
+}
+
+@media(max-width:768px){
+
+.hero h1{
+    font-size:30px;
+}
+
+.blog-post{
+    padding:20px;
+}
+
+nav{
+    flex-direction:column;
+    gap:15px;
+}
+
+nav ul{
+    gap:20px;
+}
+
+}
+
+</style>
+
+</head>
+<body>
+
+<header>
+
+<nav>
+
+<div class="logo">Luxury Hotel</div>
+
+<ul>
+<li><a href="#">Home</a></li>
+<li><a href="#">Rooms</a></li>
+<li><a href="#">Blog</a></li>
+<li><a href="#">Gallery</a></li>
+<li><a href="#">Contact</a></li>
+</ul>
+
+</nav>
+
+</header>
+
+<section class="hero">
+
+<img src="images/Hotel-WordPress-Theme-Blog-Post-1.jpg" alt="Hotel">
+
+<h1>Welcome To Our Luxury Hotel</h1>
+
+<p>Experience elegance, comfort and unforgettable hospitality.</p>
+
+</section>
+
+<div class="container">
+
+<article class="blog-post">
+
+<small>Published on June 15, 2024 • By Irfan</small>
+
+<h2>Incredible Services</h2>
+
+<p>
+
+Our hotel offers world-class hospitality designed to make every guest feel special.
+From luxurious spa treatments and gourmet restaurants to airport transfers,
+conference halls and 24-hour concierge services, we ensure your stay is both
+comfortable and memorable.
+
+</p>
+
+<details>
+
+<summary class="read-btn">
+
+Continue Reading →
+
+</summary>
+
+<p>
+
+Guests can also enjoy our swimming pool, fitness center, rooftop dining,
+business lounge, children's play area, complimentary Wi-Fi, valet parking,
+laundry service and guided city tours. Every service is carefully planned
+to provide a relaxing and unforgettable experience.
+
+</p>
+
+</details>
+
+</article>
+
+<article class="blog-post">
+
+<small>Published on June 20, 2024 • By Usman</small>
+
+<h2>Luxurious Accommodations</h2>
+
+<p>
+
+Our beautifully designed rooms combine modern elegance with maximum comfort.
+Each room includes premium bedding, smart TVs, air conditioning, minibars,
+high-speed internet and stunning views of the city and mountains.
+
+</p>
+
+<details>
+
+<summary class="read-btn">
+
+Continue Reading →
+
+</summary>
+
+<p>
+
+Choose from Deluxe Rooms, Executive Suites and Presidential Suites.
+Wake up to breathtaking views, enjoy breakfast in bed, relax in spacious
+living areas and experience personalized room service available around the clock.
+Every detail is designed to exceed your expectations.
+
+</p>
+
+</details>
+
+</article>
+
+<article class="blog-post">
+
+<small>Published on June 25, 2024 • By Sarah</small>
+
+<h2>Fine Dining Experience</h2>
+
+<p>
+
+Taste delicious international cuisine prepared by award-winning chefs.
+Our restaurants serve fresh ingredients, elegant desserts and refreshing
+beverages in a luxurious atmosphere.
+
+</p>
+
+<details>
+
+<summary class="read-btn">
+
+Continue Reading →
+
+</summary>
+
+<p>
+
+Whether you prefer Asian, Continental or traditional local dishes,
+our chefs create unforgettable dining experiences.
+Enjoy candlelight dinners, rooftop cafés and live music while
+savoring every bite.
+
+</p>
+
+</details>
+
+</article>
+
+</div>
+
+<footer>
+
+<h3>Luxury Hotel Blog</h3>
+
+<p>
+
+© 2024 Luxury Hotel. All Rights Reserved.
+
+</p>
+
+</footer>
+
+</body>
+</html>
