@@ -1,0 +1,200 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Advanced CSS Table</title>
+
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: Arial, Helvetica, sans-serif;
+      }
+
+      body {
+        background: #f4f6f9;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+      }
+
+      .table-container {
+        width: 85%;
+        overflow-x: auto;
+      }
+
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        background: white;
+        border-radius: 12px;
+        overflow: hidden;
+        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+      }
+
+      thead {
+        background: linear-gradient(45deg, #0f2027, #203a43, #2c5364);
+        color: white;
+      }
+
+      th {
+        padding: 18px;
+        text-align: left;
+        letter-spacing: 1px;
+        font-size: 17px;
+      }
+
+      td {
+        padding: 15px;
+        text-align: left;
+      }
+
+      tbody tr {
+        transition: 0.3s;
+      }
+
+      tbody tr:nth-child(even) {
+        background: #f1f5f9;
+      }
+
+      tbody tr:nth-child(odd) {
+        background: white;
+      }
+
+      tbody tr:hover {
+        background: #3498db;
+        color: white;
+        transform: scale(1.01);
+      }
+
+      td,
+      th {
+        border-bottom: 1px solid #ddd;
+      }
+
+      tbody tr:last-child td {
+        border-bottom: none;
+      }
+
+      .status {
+        padding: 6px 12px;
+        border-radius: 20px;
+        color: white;
+        font-size: 14px;
+        font-weight: bold;
+      }
+
+      .active {
+        background: #28a745;
+      }
+
+      .pending {
+        background: #ffc107;
+        color: black;
+      }
+
+      .inactive {
+        background: #dc3545;
+      }
+
+      button {
+        padding: 8px 14px;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        color: white;
+        transition: 0.3s;
+      }
+
+      .edit {
+        background: #17a2b8;
+      }
+
+      .delete {
+        background: #dc3545;
+      }
+
+      button:hover {
+        opacity: 0.8;
+        transform: scale(1.05);
+      }
+
+      @media (max-width: 768px) {
+        th,
+        td {
+          padding: 12px;
+          font-size: 14px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="table-container">
+      <table>
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Course</th>
+            <th>Timing</th>
+            <th>Status</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+
+        <tbody>
+          <tr>
+            <td>1</td>
+            <td>Atta Ur Rahman</td>
+            <td>MERN Stack</td>
+            <td>9:00 - 11:00</td>
+            <td><span class="status active">Active</span></td>
+            <td>
+              <button class="edit">Edit</button>
+              <button class="delete">Delete</button>
+            </td>
+          </tr>
+
+          <tr>
+            <td>2</td>
+            <td>Ali</td>
+            <td>Python</td>
+            <td>11:00 - 1:00</td>
+            <td><span class="status pending">Pending</span></td>
+            <td>
+              <button class="edit">Edit</button>
+              <button class="delete">Delete</button>
+            </td>
+          </tr>
+
+          <tr>
+            <td>3</td>
+            <td>Ahmed</td>
+            <td>JavaScript</td>
+            <td>2:00 - 4:00</td>
+            <td><span class="status inactive">Inactive</span></td>
+            <td>
+              <button class="edit">Edit</button>
+              <button class="delete">Delete</button>
+            </td>
+          </tr>
+
+          <tr>
+            <td>4</td>
+            <td>Usman</td>
+            <td>React</td>
+            <td>4:00 - 6:00</td>
+            <td><span class="status active">Active</span></td>
+            <td>
+              <button class="edit">Edit</button>
+              <button class="delete">Delete</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </body>
+</html>

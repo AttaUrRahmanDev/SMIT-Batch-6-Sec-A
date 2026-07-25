@@ -1,0 +1,15 @@
+.container {
+  /* background-color: rgba(135, 47, 47, 0.9); */
+  width: 500px;
+  height: 500px;
+  color: rgb(47, 10, 10);
+  /* opacity: 0.9; */
+  /* background-image: url("./keegan-houser--Q_t4SCN8c4-unsplash.jpg"); */
+  /* background-size: cover; */
+  /* background-size: contain no-repeat; */
+  border: 1px solid black;
+  /* background-position: top bottom; */
+  background-size:top left
+  background-size: contain;
+  background: url("./keegan-houser--Q_t4SCN8c4-unsplash.jpg") 40% 10%;
+}

@@ -1,0 +1,119 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Selectors</title>
+  </head>
+  <style>
+    /* Universal Selector */
+    * {
+      color: aqua;
+      /* border: 1px solid black; */
+      padding: 10px;
+    }
+    /*  Type Selector */
+    h2 {
+      color: black;
+    }
+    p {
+      color: blue;
+    }
+    form.form1 {
+      background-color: rgb(87, 63, 63);
+    }
+    form.form2 {
+      background-color: rgb(87, 63, 63);
+    }
+    /*  Class Selector */
+    .para {
+      font-size: 20px;
+      color: yellowgreen;
+    }
+    .form1 {
+      background-color: rgb(255, 0, 0);
+    }
+    .form2 {
+      background-color: rgb(0, 255, 0);
+    }
+    /*  ID Selector */
+
+    #paraid {
+      color: aquamarine;
+    }
+
+    /* Child Selector */
+    div > h2 {
+      color: red;
+    }
+    ul > li {
+      color: green;
+    }
+    /* Descendant Selector */
+    div h2 {
+      color: orange;
+    }
+    ul li {
+      color: purple;
+    }
+    ul a {
+      color: rgb(131, 74, 83);
+    }
+    /* Adjacent Sibling Selector */
+    h2 + p {
+      color: beige;
+    }
+    address + a {
+      color: brown;
+    }
+    /* General Sibling Selector */
+    address ~ section {
+      color: rgb(136, 255, 0);
+    }
+  </style>
+  <body>
+    <div>
+      <p class="para" id="paraId">Lorem ipsum dolor sit amet.</p>
+    </div>
+    <div>
+      <h2>Lorem.</h2>
+      <p>hi</p>
+    </div>
+    <form action="" class="form1">
+      <label class="lab" for="">Name:</label>
+      <br />
+      <input type="text" />
+    </form>
+    <form action="" class="form2">
+      <label class="lab" for="">Email:</label>
+      <br />
+      <input type="email" />
+    </form>
+    <p>
+      Lorem ipsum dolor sit amet consectetur adipisicing elit. A reprehenderit
+      ipsa harum voluptatem velit repudiandae doloremque, nobis adipisci
+      perferendis, facilis deserunt expedita, neque non blanditiis fugiat!
+      Tempore labore magnam similique?
+    </p>
+    <ul>
+      <li>Lorem ipsum dolor sit amet.</li>
+      <li>Lorem ipsum dolor sit amet.</li>
+      <li><a href="index.html">Index</a></li>
+    </ul>
+
+    <section>
+      hhhhhhhhhhhh
+      <article>
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Doloremque
+        maiores dolores, accusantium deserunt architecto ea quisquam? Similique
+        accusamus ut sit fugiat quos tempora, harum, natus dolores, alias facere
+        laudantium veniam?
+      </article>
+    </section>
+    <address>Peshawar, Pakistan</address>
+    contact:
+    <a href="mailto:urrahmana04@gmail.com">urrahmana04@gmail.com</a> copyright:
+    <a href="tel:+923001234567">+923001234567</a>
+    @copyright 2024
+  </body>
+</html>

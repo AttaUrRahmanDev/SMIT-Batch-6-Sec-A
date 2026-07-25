@@ -1,0 +1,93 @@
+/* 1. CSS VARIABLES (Custom Properties) */
+/* Define tokens in one place for easy theme changes */
+:root {
+  --bg-gradient: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
+  --card-bg: rgba(255, 255, 255, 0.08);
+  --text-color: #ffffff;
+  --accent-color: #00f2fe;
+  --transition-speed: 0.4s;
+}
+
+/* Base Setup */
+body {
+  margin: 0;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: var(--bg-gradient);
+  font-family: "Segoe UI", system-ui, sans-serif;
+  color: var(--text-color);
+  overflow: hidden;
+}
+
+/* 2. GLASSMORPHISM & SMOOTH TRANSITIONS */
+.card {
+  background: var(--card-bg);
+  padding: 2.5rem;
+  border-radius: 16px;
+  width: 320px;
+  text-align: center;
+
+  /* The magic glass property */
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px); /* Safari support */
+
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.37);
+
+  /* Controls how smoothly the hover effect triggers */
+  transition:
+    transform var(--transition-speed) cubic-bezier(0.175, 0.885, 0.32, 1.275),
+    box-shadow var(--transition-speed) ease;
+}
+
+/* 3. THE HOVER EFFECT (Transform & Box Shadow) */
+.card:hover {
+  transform: translateY(-10px) scale(1.02);
+  box-shadow: 0 20px 40px rgba(0, 242, 254, 0.2);
+}
+
+/* 4. CSS GRID & GAP */
+.grid-container {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px; /* Perfectly spaces items without margin hacks */
+  margin-top: 2rem;
+}
+
+.tag {
+  font-size: 0.75rem;
+  background: rgba(255, 255, 255, 0.1);
+  padding: 6px 4px;
+  border-radius: 20px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* 5. GRADIENT TEXT & ANIMATION */
+.card-badge {
+  display: inline-block;
+  font-size: 0.8rem;
+  font-weight: bold;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-bottom: 1rem;
+
+  /* Makes the background color clip to the text shape */
+  background: linear-gradient(90deg, #ff007f, var(--accent-color));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+
+  /* Infinite pulse animation */
+  animation: pulse 2s infinite alternate;
+}
+
+@keyframes pulse {
+  from {
+    opacity: 0.6;
+  }
+  to {
+    opacity: 1;
+    transform: scale(1.05);
+  }
+}
