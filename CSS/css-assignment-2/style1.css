@@ -1,0 +1,163 @@
+/* Global Styles */
+* {
+  margin: 0px;
+  padding: 0px;
+  box-sizing: border-box;
+  font-family: Arial, Helvetica, sans-serif;
+}
+body {
+  background-color: #f8f6f3;
+  color: #444;
+}
+
+/* Header */
+header {
+  background-color: #1f2937;
+  height: 70px;
+  box-shadow: 0px 3px 8px rgba(0, 0, 0, 0.2);
+}
+.navbar {
+  text-align: center;
+  line-height: 70px;
+}
+
+.logo {
+  color: #facc15;
+  text-decoration: none;
+  font-size: 28px;
+  font-weight: bold;
+  letter-spacing: 2px;
+}
+
+.logo:hover {
+  color: white;
+}
+
+/* Products Section */
+.Products {
+  padding: 25px 0px;
+}
+.Products-Table {
+  width: 100%;
+  text-align: center;
+}
+.Product-Image {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  transition: 0.4s;
+
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.25);
+}
+.Product-Image:hover {
+  transform: scale(1.15);
+}
+.Product-Link {
+  display: inline-block;
+  background-color: #2563eb;
+  color: white;
+  text-decoration: none;
+  border-radius: 6px;
+  margin-top: 10px;
+  padding: 6px 12px;
+  transition: 0.3s;
+  font-size: 14px;
+}
+.Product-Link:hover {
+  background-color: red;
+}
+
+/* Shopping Banner */
+.Shopping-Section {
+  background-color: #ede9fe;
+  text-align: center;
+  padding: 40px 0px;
+}
+
+.Banner {
+  width: 90%;
+  height: 60vh;
+  border-radius: 15px;
+  transition: 0.5s;
+  box-shadow: 0 8px 18px rgba(0, 0, 0, 0.25);
+}
+.Banner:hover {
+  transform: scale(1.02);
+}
+.Shopping-Section h2 {
+  margin: 30px 0;
+  color: #1e3a8a;
+  font-size: 30px;
+}
+/* Sales Table */
+
+.Sales-Table {
+  margin: auto;
+  border-radius: 10px;
+  width: 90%;
+  overflow: hidden;
+  background-color: white;
+  border-collapse: collapse;
+
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.15);
+}
+
+.Sales-Table th {
+  color: white;
+  background-color: #7c3aed;
+}
+.Sales-Table th .Sales-Table td {
+  border: 1px solid #ccc;
+  padding: 14px;
+  text-align: center;
+}
+.Sales-Table tr:nth-child(even) {
+  background: #f3f4f6;
+}
+
+.Sales-Table tr:hover {
+  background-color: #ddd6fe;
+}
+
+/* Information Section */
+
+.Content {
+  width: 90%;
+  margin: 40px auto;
+  line-height: 1.8;
+}
+.Content h1 {
+  text-align: center;
+  color: #1e3a8a;
+  margin-bottom: 20px;
+}
+
+.Content h2 {
+  color: #7c3aed;
+  margin-top: 30px;
+  margin-bottom: 15px;
+}
+
+.Content p {
+  color: #555;
+  text-align: justify;
+  margin-bottom: 18px;
+}
+
+.Content ul {
+  margin-left: 30px;
+  margin-bottom: 20px;
+}
+.Content li {
+  margin: 8px 0;
+}
+
+/* Footer */
+footer {
+  background: #111827;
+  color: white;
+  text-align: center;
+  padding: 25px;
+  font-size: 15px;
+  margin-top: 40px;
+}

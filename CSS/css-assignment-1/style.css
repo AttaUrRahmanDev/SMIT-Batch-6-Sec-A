@@ -1,0 +1,7 @@
+* {
+  border: 2px 4px solid lightgrey;
+}
+h1 {
+  border: 2px solid lightblue;
+  border-radius: 50px 0px 50px 0px;
+}

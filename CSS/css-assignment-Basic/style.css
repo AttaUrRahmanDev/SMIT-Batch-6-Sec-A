@@ -1,0 +1,118 @@
+/* ==========================
+   External CSS
+========================== */
+
+/* Body */
+
+body{
+    margin:0;
+    padding:0;
+    font-family:Arial, Helvetica, sans-serif;
+}
+
+/* Container */
+
+.container{
+
+    width:1000px;
+    height:600px;
+
+    margin:40px auto;
+    padding:30px;
+
+    text-align:center;
+
+    color:rgb(47,10,10);
+
+    opacity:0.8;
+
+    /* Background Shorthand */
+
+    background:
+        rgba(255,255,255,0.5)
+        no-repeat
+        fixed
+        center center
+        url("images/logo.png");
+
+    background-size:contain;
+
+    border:2px solid gray;
+
+    border-radius:10px;
+}
+
+/* Logo */
+
+.logo{
+    width:120px;
+    height:auto;
+    margin-bottom:20px;
+}
+
+/* Heading */
+
+h2{
+    color:darkblue;
+    font-size:32px;
+}
+
+h1{
+    font-size:42px;
+}
+
+/* Paragraph */
+
+p{
+    font-size:20px;
+}
+
+/* ==========================
+   Practice Background Properties
+========================== */
+
+/* Background Color */
+/*
+background-color: rgba(135,47,47,0.1);
+background-color: lightblue;
+background-color: pink;
+*/
+
+/* Opacity */
+/*
+opacity:0.1;
+opacity:0.5;
+opacity:0.8;
+opacity:1;
+*/
+
+/* Background Repeat */
+/*
+background-repeat:repeat;
+background-repeat:repeat-x;
+background-repeat:repeat-y;
+background-repeat:no-repeat;
+*/
+
+/* Background Attachment */
+/*
+background-attachment:fixed;
+background-attachment:scroll;
+*/
+
+/* Background Size */
+/*
+background-size:cover;
+background-size:contain;
+background-size:auto;
+*/
+
+/* Background Position */
+/*
+background-position:center center;
+background-position:top left;
+background-position:top right;
+background-position:bottom left;
+background-position:bottom right;
+background-position:40% 10%;
+*/

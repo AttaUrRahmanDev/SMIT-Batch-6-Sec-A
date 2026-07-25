@@ -1,0 +1,168 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Hotel Blog</title>
+    <link rel="stylesheet" href="blog.css" />
+  </head>
+  <style>
+   
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #F5F5F5;
+    }
+
+    img {
+      margin: auto;
+      width:  40%;
+      height:  auto;
+      display: block;
+      box-shadow: 10px 10px 20px rgba(0, 0, 0, 0.2);
+    }
+    img:hover {
+      box-shadow: 10px 10px 20px rgba(34, 27, 27, 0.3);
+    }
+    
+
+    h1 ,h4{
+      text-align: center;
+      margin-top: 20px;
+    }
+
+    p {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    .blog-posts {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      box-shadow: 10px 10px 10px rgba(0, 0, 0, 0.2);
+      width: 40%;
+      margin:  auto;
+      box-sizing: border-box;
+      color: #333;
+      background-color: #F8F4EC;
+      text-align: center;
+
+    }
+    .blog-posts h1 {
+      margin-top: 10px;
+      color: #C89B3C;
+    }
+    .blog-posts small {
+      color: #888;
+      font-size: 0.9em;
+      margin-bottom: 10px;
+    }
+    .blog-posts:hover {
+      box-shadow: 10px 10px 20px rgba(214, 101, 101, 0.3);
+    }
+
+    .read-btn{
+    display:inline-block;
+    background:#C89B3C;
+    color:white;
+    padding:10px 20px;
+    border-radius:5px;
+    cursor:pointer;
+    list-style:none;
+    text-align: center;
+    
+}
+
+.read-btn:hover{
+    background:#A67C2E;
+}
+
+details p{
+    margin-top:15px;
+/* }
+    details p {
+      width: 40%;
+      /* margin: auto; */
+      text-align: justify;
+      display: block;
+    } */
+
+    .read-btn{
+        text-align: justify;
+        margin: 20px;
+        color: #555;}
+    /* .more-content p{
+        text-align: justify;
+        margin: 20px;
+        color: #555;
+  }     */
+details  {
+      /* width: 60%; */
+      margin-left: 20px;
+      MARgin-right: 20px;
+      text-align: center;
+      display: block;
+    }
+
+    .blog-posts p {
+      text-align: justify;
+      /* width: 60%; */
+      color: #555;
+      margin-left: 20px;
+      margin-right: 20px;
+    }
+  </style>
+  <body>
+    <header><nav> <a href="">Home</a></nav></header>
+    <img
+      src="images/Hotel-WordPress-Theme-Blog-Post-1.jpg"
+      alt="Blog Post Image"
+    />
+    <h4>Welcome to Our Hotel</h4>
+    
+    <div class="blog-posts">
+      <article><small>Published on: 2024-06-15 By Irfan.</small>
+      <h1>Incredible Services</h1>
+      <p>
+        Our hotel offers a range of incredible services to ensure your stay is
+        comfortable and memorable. From luxurious spa treatments to gourmet
+        dining experiences, we cater to all your needs. Our dedicated staff is
+        always ready to assist you, making sure that every moment of your stay
+        is enjoyable. Whether you're here for business or leisure, our hotel
+        provides the perfect environment for relaxation and productivity.
+      </p></article>
+    </div>
+    <br />
+   
+    <div class="blog-posts">
+         
+         <small style="text-align: center; display: block;">Published on: 2024-06-15 By Usman.</small>
+      <h1>Luxurious Accommodations</h1>
+      <p>
+        Our hotel features luxurious accommodations designed to provide the
+        utmost comfort and style. Each room is elegantly furnished with modern
+        amenities, ensuring a restful and rejuvenating stay. Enjoy breathtaking
+        views from your room, and take advantage of our premium services,
+        including room service, concierge assistance, and more. Whether you
+        choose a standard room or a suite, you'll find that every detail has
+        been thoughtfully considered to enhance your experience.</p>
+    <details class="read-more">
+        <summary class="read-btn">Continue Reading &rarr; </summary>
+
+        <p>
+            We also provide a swimming pool, spa, free Wi-Fi,
+            airport pickup, fine dining, and beautiful mountain views.
+            Our experienced staff is available 24/7 to make your stay memorable.
+        </p>
+    </details>
+      
+    </div>
+    
+    <footer>
+      <p style="text-align: center; margin-top: 20px;">
+        &copy; 2024 Hotel Blog. All rights reserved.
+      </p>
+  </body>
+</html>
