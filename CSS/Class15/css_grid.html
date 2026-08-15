@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      .container {
+        border: 1px solid;
+        height: 55vh;
+        width: 70vw;
+        display: grid;
+        /* grid-template-columns:100px auto 100px 120px; */
+        /* grid-template-columns:100px 100px 100px 100px 100px; */
+        /* grid-template-columns:2fr 100px 1fr; */
+        grid-template-columns: 2fr 100px 1fr;
+        /* grid-template-columns: auto 100px auto; */
+        /* grid-template-columns:repeat(5,50px); */
+        grid-template-rows: 100px 100px auto;
+        /* horizontal alignment */
+        /* justify-items: center; */
+        /* justify-items: start; */
+        /* justify-items: end; */
+
+        /* Vertical Alignment */
+        /* align-items: center; */
+        /* align-items: end; */
+        place-items: center;
+        align-content: center;
+      }
+      .grid_item {
+        border: 1px solid #000;
+        /* width: 55px;
+            height: 55px; */
+            
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Flex Box -1D -->
+    <!-- Grid System-2D-At A Time -Row & Column  -->
+    <div class="container">
+      <div class="grid_item"></div>
+      <div class="grid_item"></div>
+      <div class="grid_item"></div>
+      <div class="grid_item"></div>
+      <div class="grid_item"></div>
+    </div>
+  </body>
+</html>
+
+
+
+
+
+
+
+
+
+
+>

@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title><style>
+        /* 1. Hide the actual checkbox from view */
+.toggle-checkbox {
+  display: none;
+}
+
+/* 2. Base Grid Layout (Sidebar open by default) */
+.container {
+  display: grid;
+  grid-template-columns: 250px 1fr; 
+  min-height: 100vh;
+  transition: grid-template-columns 0.3s ease; 
+}
+
+/* 3. THE MAGIC: When checkbox is checked, collapse the sidebar column to 0px */
+.toggle-checkbox:checked ~ .container {
+  grid-template-columns: 0px 1fr;
+}
+
+/* 4. Style the layout elements */
+.sidebar {
+  background-color: #2c3e50;
+  color: white;
+  padding: 20px;
+  overflow: hidden; /* Keeps text hidden when column width hits 0px */
+}
+
+.main-content {
+  background-color: #ecf0f1;
+  padding: 20px;
+}
+
+/* Style the label to look like a real button */
+.toggle-btn {
+  display: inline-block;
+  padding: 10px 15px;
+  background-color: #34495e;
+  color: white;
+  cursor: pointer;
+  margin-bottom: 20px;
+}
+
+    </style>
+    
+</head>
+<body>
+    <!-- The hidden checkbox that tracks the open/closed state -->
+<input type="checkbox" id="sidebar-toggle" class="toggle-checkbox">
+
+<div class="container">
+  <aside class="sidebar">
+    <h2>Sidebar</h2>
+    <p>Link 1</p>
+    <p>Link 2</p>
+  </aside>
+  
+  <main class="main-content">
+    <!-- The label acts as the button. Clicking it checks/unchecks the input above -->
+    <label for="sidebar-toggle" class="toggle-btn">☰ Toggle Sidebar</label>
+    <h1>Main Content</h1>
+    <p>No JavaScript used here!</p>
+  </main>
+</div>
+
+</body>
+</html>

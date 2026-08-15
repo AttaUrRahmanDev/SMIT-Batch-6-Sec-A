@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        *{
+            padding: 0;
+            margin: 0;
+            box-sizing: border-box;
+        }
+        .container{
+            width: 100%;
+            height: 100vh;
+            border: 1px solid #000;
+        }
+        header{
+            border: 1px solid #000;
+            display: flex;
+            height: 10vh;
+            align-items: center;
+            justify-content: space-around;
+
+            
+        }
+        header>ul{
+            list-style: none;
+            display: flex;
+            gap: 10px;
+            
+
+        }
+header>div{
+    font-size: 24px;
+    font-weight: bold;
+}
+main{
+    /* display: flex; */
+    border: 1px solid #000;
+box-sizing: border-box;
+height: 100%;
+width: 20%;
+padding: 30px;
+
+}
+
+aside{
+    list-style: none;
+display: flex;
+flex-direction: column;
+gap: 10px;
+}
+.grid-container{
+    width: 80%;
+    border: 1px solid #000;
+    display: grid;
+    grid-template-columns: repeat(3,1fr);
+    grid-template-rows: repeat(3,1fr);
+}
+.grid-item{
+    border: 1px solid #000;
+    height: 200px;
+
+}
+.grid-item-4{
+    grid-column: 1/4;
+    grid-row:2/3;
+
+}
+.grid-item-5{
+grid-row: ;
+}
+    </style>
+</head>
+<body>
+    <div class="grid-container">
+<header>
+    <ul>
+        <li><a href=""></a></li>
+        <li><a href=""></a></li>
+        <li><a href=""></a></li>
+        <li><a href=""></a></li>
+        <li><a href=""></a></li>
+    </ul>
+
+</header>
+<main>
+    <aside>
+        <ul>
+            li*>a>
+        </ul>
+
+    </aside>
+</main>
+    </div>
+    
+</body>
+</html>

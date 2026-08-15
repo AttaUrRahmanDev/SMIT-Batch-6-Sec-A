@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Transition</title>
+    <style>
+        .container{
+            height: 100px;
+            width: 100px;
+            border: 1px solid #000;
+            margin: auto;
+            transition-property: all; 
+            /* Apply on all css properlties */
+            /* transition-delay: 2s; */
+            transition-duration: 4s;
+            /* transition-timing-function: ease; */
+            /* transition-timing-function: linear; */
+            /* transition-timing-function: ease-in; */
+            /* transition-timing-function: ease-out; */
+            /* transition-timing-function: ease-in-out; */
+            transition: all 2s 3s ease;
+
+        }
+        .container:hover{
+            /* transform: scale(1.5); */
+transform: translateX(500px);
+        }
+
+    </style>
+</head>
+<body>
+    <!-- Translate & Skill Mostly Used -->
+<div class="container"></div>
+    
+</body>
+</html>

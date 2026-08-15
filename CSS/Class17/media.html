@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Media Query</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            padding: 0;
+            margin: 0;
+        }
+        body{
+            height: 100vh;
+            justify-self: center;
+            align-content   : center;
+        }
+        main{
+            display: grid;
+            grid-template-columns: repeat(1, 1fr);
+            width: 90vw;
+            height: 90vh;
+            /* margin: auto; */
+            /* place-self: center; */
+            border: 1px solid #000;
+        }
+
+        .child {
+            border: 1px solid #000;
+        }
+
+        @media (min-width: 425px)
+        {
+            .one {
+            grid-template-columns: repeat(2, 1fr);
+
+            }
+        }
+    </style>
+</head> 
+<body>
+    <main class="one">
+        <div class="child">1</div>
+        <div class="child">2</div>
+        <div class="child">3</div>
+        <div class="child">4</div>
+        <div class="child">5</div>
+        <div class="child">6</div>
+        <div class="child">7</div>
+        <div class="child">8</div>
+    </main>
+</body>
+</html>

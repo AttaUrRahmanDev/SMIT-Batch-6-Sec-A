@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>/* Container holds both sections */
+.container {
+  display: grid;
+  /* Sidebar starts at 250px, main content takes the rest */
+  grid-template-columns: 250px 1fr; 
+  min-height: 100vh;
+  /* Smoothly animates the open/close transition */
+  transition: grid-template-columns 0.3s ease; 
+}
+
+/* When this class is added, collapse the sidebar column to 0 */
+.container.sidebar-hidden {
+  grid-template-columns: 0px 1fr;
+}
+
+.sidebar {
+  background-color: #2c3e50;
+  color: white;
+  padding: 20px;
+  /* Prevents text from breaking or sticking out when collapsed */
+  overflow: hidden; 
+}
+
+.main-content {
+  background-color: #ecf0f1;
+  padding: 20px;
+}
+
+.toggle-btn {
+  padding: 10px 15px;
+  margin-bottom: 20px;
+  cursor: pointer;
+}
+
+/* Targets screens that are 768px wide or smaller */
+@media (max-width: 768px) {
+  .container {
+    /* Changes layout to a single column stack */
+    grid-template-columns: 1fr; 
+  }
+}
+
+
+</style>
+</head>
+<body>
+   <div class="container" id="layoutContainer">
+  <aside class="sidebar">
+    <h2>Sidebar</h2>
+    <p>Link 1</p>
+    <p>Link 2</p>
+  </aside>
+  
+  <main class="main-content">
+    <!-- Button to collapse/expand the sidebar -->
+    <button class="toggle-btn" id="toggleBtn">☰ Toggle Sidebar</button>
+    <h1>Main Content</h1>
+    <p>Watch this space expand when the sidebar disappears.</p>
+  </main>
+</div>
+
+<script>const toggleBtn = document.getElementById('toggleBtn');
+const layoutContainer = document.getElementById('layoutContainer');
+
+toggleBtn.addEventListener('click', () => {
+  // Toggles the class on and off with each click
+  layoutContainer.classList.toggle('sidebar-hidden');
+});
+</script>
+</body>
+</html>

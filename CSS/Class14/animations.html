@@ -1,0 +1,191 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Animations</title>
+    <style>
+/* 
+        The core difference is that transform staticly changes an element's shape, size, or position, transition smoothly animates a change between two states when triggered, and animation creates complex, multi-step movements using keyframes. Think of transform as what changes visually, transition as a simple auto-pilot from point A to point B, and animation as a fully scripted movie.Direct Comparison */
+              .container{
+                  width: 100px;
+                  height: 100px;
+                  border: 1px solid #000;
+                  /* animation-name: identifier; */
+                  animation-name: changecolor;
+                  animation-duration: 2s;
+                  animation-iteration-count:infinite ;
+                  /* animation-iteration-count:initial ; */
+
+              }
+              .slideAndFade{
+                width: 100px;
+                height: 100px;
+                border: 1px solid #000;
+                background: green;
+                animation-name: slideAndFade;
+                  animation: slideAndFade 4s ease-in-out infinite reverse;
+                /* animation-duration: 4s; */
+                /* animation-iteration-count: infinite; */
+                box-shadow: 2px 2px 5px violet;
+                animation-timing-function: linear;
+
+              }
+              .container:hover{
+                  animation-play-state: paused;
+
+              }
+              .loading{
+                  height: 50px;
+                  width: 50px;
+                  border-top: 2px solid blue;
+                  background-color: antiquewhite;
+                  margin: auto;
+                  border-radius: 50%;
+                  animation-name: loading;
+                  animation-duration: 2s;
+                  animation-iteration-count: infinite;
+                  /* animation-direction: alternate; */
+                  /* animation-direction: alternate-reverse; */
+                  /* animation-direction: reverse; */
+                  /* animation-fill-mode:both ; */
+      animation-timing-function: linear;
+      box-shadow: 2px 2px 5px blue;
+              }
+              @keyframes loading{
+                  from{
+                      transform:rotate(0);
+
+                  }
+                  to{
+                    transform: rotate(360deg);
+
+                  }
+              }
+              @keyframes changecolor{
+
+              0%{
+                  transform:translateX(0px) ;
+
+
+
+                  }
+                  5%{
+                      background-color: blue;
+                  }
+                  10%{
+                      background-color: red;
+                  }
+                  50%{
+                      border-radius: 50%;
+
+                  }
+                  100%{
+                      transform: translateX(500px);
+                      background-color:blueviolet;
+
+                  }
+
+
+              }
+
+              /* @keyframes identifier {
+                  from{
+                      transform: translateX(000px);
+                  }
+                  to{
+                      transform: translateX(500px);
+                      border-radius: 50px;
+                  } */
+
+              @keyframes slideAndFade {
+  0% {
+    opacity: 0;
+    transform: translateY(0px); /* Start 20px lower */
+  }
+  50% {
+    opacity: 0.5;
+    transform: translateY(300px); /* Overshoot slightly up */
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);    /* Settle at final position */
+  }
+}
+.bounce{
+    height: 100px;
+    width: 100px;
+    border:  solid #000;
+    margin: auto;
+    animation-name: bounce;
+    animation-duration: 1s;
+    border-radius: 50%;
+    animation-iteration-count: infinite;
+    animation-direction: alternate-reverse;
+
+
+}
+
+@keyframes bounce {
+    100%{
+        transform: translateY(300px);
+    }
+    0%{
+        transform: translateY(0px);
+    }
+    
+}
+.squaremove{
+    height: 100px;
+    width: 100px;
+    border:  solid #000;
+    animation-name: squaremove;
+    animation-duration:4s;
+    animation-direction:alternate ;
+    position: relative;
+    
+
+}
+
+@keyframes squaremove {
+    0%{
+        top:0;
+        left:0;
+    /* transform: translateX(0); */
+    }
+    25%{
+        top: 0;
+        left:500px;
+    /* transform: translateX(500); */
+    border-radius: 50px;
+}
+50%{
+    left:500px;
+    top:500px;
+    /* transform: translateY(0); */
+}
+75%{
+        border-radius: 50px;
+        left:0;
+        top: 500px;
+    /* transform: translateX(0); */
+    }
+    
+    100%{
+        left:0;
+        top:0;
+    /* transform: translateX(0); */
+    }
+    
+}
+
+    </style>
+  </head>
+  <body>
+    <div class="container"></div>
+    <div class="loading"></div>
+    <div class="slideAndFade"></div>
+    <div class="bounce"></div>
+    <div class="squaremove"></div>
+  </body>
+</html>
