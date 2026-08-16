@@ -7,8 +7,7 @@ console.log("Welcome to js")
 
 // var userInput = prompt("Please Enter Student Marks",)
 // alert("Grade A+")
-var userAge=prompt("Please Enter Your Age!",18  )
-
-
-
-alert("You Are Eligible")
+var userAge = parseInt(prompt("Please Enter Your Age!", "18"));
+if (userAge > 18) {
+    alert("You Are Eligible");
+}
