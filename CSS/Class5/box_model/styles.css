@@ -1,41 +1,60 @@
+
+/* Border */
+
 .container {
   /* border-width: 5px; */
   /* border-style:solid; */
   /* border-color: blue;  */
+
+  
+/* border: 5px dashed blue; */
   /* border-top: 5px dashed rgb(180, 180, 187);
   border-left: 5px dashed red;
   border-right: 5px dashed green;
   border-bottom: 5px dashed blue; */
-  border: 1px solid black;
+  /* border-top: 5px solid rgb(190, 190, 197);
+  border-left: 5px solid rgb(220, 60, 90);
+  border-right: 5px solid rgb(76, 204, 61);
+  border-bottom: 5px solid rgb(56, 56, 103); */
+/* } */
+/* outline: 1px solid black; */
+/* outline-offset: 10px; */
+  border: 2px solid;
+  /* border: 1px solid black; */
   /* padding-top: 10px;
   padding-bottom: 20px;
   padding-left:30px;
   padding-right: 40px; */
   /* padding: 10px; */
   /* padding: 10px 20px 30px 40px; */
-  padding: 30px 40px;
+    /* padding: 10px 20px 10px 20px; */
+   padding: 30px 40px;
+
   /* border-radius: 20px; */
   /* border-radius:40px 0px 40px 0px */
   /* border-radius:10px 5px; */
-  /* border-radius:10px 5px 10px 5px; */
+  border-radius:10px 5px 10px 5px;
   border-radius: 10px 5px;
   /* height: 500px; */
-  /* margin: auto; */
+  
   /* margin-top:50px;
   margin-left:50px;
   margin-right:50px;
   margin-bottom: 50px; */
   /* margin: 50px; */
-  /* margin:10px 20px 30px 40px; */
   margin: 10px 20px;
+  /* margin:10px 20px 30px 40px; */
+  /* margin: auto; */
 }
 .circle {
   /* width:100px; */
   height: 100px;
   width: 100px;
   border: 1px solid;
+  /* border-radius: 50%; */
   border-radius: 50px;
 }
+/* By Sir */
 .responsive {
   border: 1px solid;
   height: 100px;
@@ -49,10 +68,12 @@
 p {
   /* border: none; */
 }
+/* My ONE */
 .responsive {
   border: 1px solid;
-  height: 1000px;
-  margin: 100px 800px;
+  height: 300px;
+  /* margin: 100px 800px; */
+  margin:auto;
   /* width:500px; */
   /* max:maximum width */
   /* min:minimum width */

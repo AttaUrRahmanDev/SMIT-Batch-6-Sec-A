@@ -1,0 +1,40 @@
+/* This CSS technique allows you to change the transparency of a single color variable dynamically anywhere on your website.By saving only the raw numbers of a color without locking in the rgb() wrapper or commas, you create a flexible "color template."Here is exactly how the browser reads and processes that code:1. The Step-by-Step Breakdown
+The Variable Defintion:
+css--my-pink: 158 108 108;
+Use code with caution.This does not create a color yet. It simply stores the plain text string "158 108 108" inside a custom variable name.
+The Substitution:css
+color: rgb(var(--my-pink) / 0.7);
+Use code with caution.The browser sees var(--my-pink) and swaps it out for the raw numbers you stored.
+The Final Result:Behind the scenes, the browser compiles your code into this valid modern CSS:css
+color: rgb(158 108 108 / 0.7); */
+/* In CSS, :root is a pseudo-class selector that targets the highest-level element in your website's code structure.For a standard webpage, the :root element is exactly the same as the <html> element.What is it used for?The absolute main purpose of :root is to store global CSS Variables.By placing your custom variables inside :root, you ensure they are available to every single element across your entire website. Because of CSS inheritance, any style defined at the root cascades down to the headers, paragraphs, buttons, and footers automatically. */
+:root {
+  --my-pink: 158 108 108; /* Notice: no commas here */
+}
+
+.text-element {
+  /* This injects the numbers perfectly into the modern syntax */
+  color: rgb(var(--my-pink) / 0.7); 
+}
+
+
+
+/* 1. DEFINE YOUR DESIGN RULES HERE */
+:root {
+  --primary-color: #007bff;   /* Brand Blue */
+  --success-color: #28a745;   /* Success Green */
+  --base-font-size: 16px;     /* Default Text Size */
+  --border-radius: 8px;       /* Consistent Rounded Corners */
+}
+
+/* 2. USE THEM ANYWHERE BELOW */
+.btn-submit {
+  background-color: var(--primary-color);
+  border-radius: var(--border-radius);
+}
+
+.alert-box {
+  border: 2px solid var(--success-color);
+  font-size: var(--base-font-size);
+  border-radius: var(--border-radius);
+}

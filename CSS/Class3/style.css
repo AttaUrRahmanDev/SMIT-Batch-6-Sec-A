@@ -1,0 +1,16 @@
+/*Google Example: The background is 50% transparent, but the text remains fully opaque. This is often preferred for readability.*/
+
+
+
+  /* METHOD 1: Alpha (Selective Transparency) */
+.alpha-container {
+  background-color: rgba(0, 0, 0, 0.5); /* Only the background is 50% transparent */
+  color: #ffffff;                        /* Text stays 100% solid white (highly readable) */
+}
+
+/* METHOD 2: Opacity (Global Transparency) */
+.opacity-container {
+  background-color: #000000;
+  color: #ffffff;
+  opacity: 0.5;                         /* The background AND the text become 50% transparent */
+}

@@ -1,15 +1,21 @@
-.container {
-  /* background-color: rgba(135, 47, 47, 0.9); */
-  width: 500px;
-  height: 500px;
-  color: rgb(47, 10, 10);
-  /* opacity: 0.9; */
-  /* background-image: url("./keegan-houser--Q_t4SCN8c4-unsplash.jpg"); */
-  /* background-size: cover; */
-  /* background-size: contain no-repeat; */
-  border: 1px solid black;
-  /* background-position: top bottom; */
-  background-size:top left
-  background-size: contain;
-  background: url("./keegan-houser--Q_t4SCN8c4-unsplash.jpg") 40% 10%;
+* {
+  box-sizing: border-box;
 }
+
+html, body {
+  margin: 0;
+  padding: 0;
+  /* overflow: hidden; */
+}
+
+.container {
+  width: 100vw;
+  height: 100vh;
+  border: 1px solid black;
+
+  background: url("./keegan-houser--Q_t4SCN8c4-unsplash.jpg") 40% 100%;
+  /* background-position: 40% 10%; */
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+}
+
