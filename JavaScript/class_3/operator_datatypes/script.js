@@ -98,3 +98,7 @@ Syntax:
 `My namme is ${firstName} ${lastName}`
 */
 console.log(`My name is ${firstName} ${lastName}`); // string
+
+// Primitive & Non-Primitive Data Types
+
+// let names= "test", "test1", "test2", "test3";
