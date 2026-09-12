@@ -56,17 +56,38 @@ if(condition){
 
 
 // let role="admin";
-let role="user";
-let email="xyz@gmail.com";
-let password=123;
+// let role="user";
+// let email="xyz@gmail.com";
+// let password=123;
 
-if (email === "xyz@gmail.com" && password === 321)  {
-    if(role=="admin"){
-        document.write("You Can Post");
-    }else{
-        document.write("You Can't Post ");
-    }
+// if (email === "xyz@gmail.com" && password === 321)  {
+//     if(role=="admin"){
+//         document.write("You Can Post");
+//     }else{
+//         document.write("You Can't Post ");
+//     }
 
-}else{
-    document.write("Invalid Credentials");
-}
+// }else{
+//     document.write("Invalid Credentials");
+// }
+
+// Task: Write a program to take marks from user and display grade according to marks.
+
+let marks=prompt("Enter Your Marks: ",0);
+let grade;
+if (marks>=90){
+    grade="A+";
+}else if(marks>=80){
+    grade="A";}
+else if(marks>=70){
+    grade="B+";}
+else if(marks>=60){
+    grade="B";}
+else if(marks>=50){
+    grade="C";}
+else
+{
+    grade="Fail";}
+document.write("Your Grade is: " + grade);
+    
+

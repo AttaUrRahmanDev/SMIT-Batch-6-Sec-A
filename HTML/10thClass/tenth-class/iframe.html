@@ -4,8 +4,20 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Iframe</title>
+    <style>
+.no-scroll {
+  width: 100%;       /* Adjust width as needed */
+  height: 500px;     /* Adjust height as needed */
+  overflow: hidden;  /* Prevents visual scrollbars */
+  border: none;
+  
+  /* OPTIONAL: Stops users from scrolling the iframe via mousewheel/touch. 
+     Note: This also disables clicking links or interacting inside the frame. */
+  pointer-events: none; 
+}
+</style>
   </head>
   <body>
-    <iframe src="https://www.wikipedia.org/" frameborder="0">sldjflk</iframe>
+    <iframe src="https://www.wikipedia.org/" class="no-scroll" frameborder="0">sldjflk</iframe>
   </body>
 </html>
