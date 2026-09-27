@@ -20,4 +20,5 @@ function welcome(name) {
 // welcome();
 
 let studentName = prompt("Enter Student Name: ");
+// welcome("Kamran"); //Argument
 welcome(studentName); //Argument
