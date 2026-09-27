@@ -86,3 +86,18 @@ function greet(name){
     console.log("Hello, "+name+"!")
 }   
 greet()
+
+
+
+
+
+let total = 0;
+let marks = [78, 92, 65, 88, 55, 73];
+
+for (let num of marks) {
+  console.log(num);
+
+  total = total + num;
+}
+
+console.log(total);
